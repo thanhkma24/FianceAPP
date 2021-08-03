@@ -16,11 +16,18 @@ class TransactionGroupModel{
     return map;
   }
 
+  factory TransactionGroupModel.fromJson(Map<String, dynamic> json) =>
+      TransactionGroupModel.withId(
+        id: json['id'] ?? 0,
+        name: json['name'] ?? '',
+        transactionTypeName: json['transactionTypeName'],
+      );
+
   factory TransactionGroupModel.fromMap(Map<String, dynamic> map) {
     return TransactionGroupModel.withId(
-      id: map['id'],
-      name: map['name'],
-      transactionTypeName: map['transactionTypeName'],
+      id: map['id'] ?? 0,
+      name: map['name'] ?? 'rong',
+      transactionTypeName: map['transactionTypeName'] ?? 'thu',
     );
   }
 }

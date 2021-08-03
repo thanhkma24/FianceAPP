@@ -7,8 +7,6 @@ import 'package:example/ui/category_screen/category_transactions.dart';
 import 'package:example/ui/mobile_home.dart';
 import 'package:flutter/material.dart';
 import 'package:localizations/localizations.dart';
-import 'package:example/ui/borrowlend/borrow_lend.dart';
-import 'package:example/ui/tab1/search_transaction/search_transac_detail.dart';
 import 'package:sqflite/sqflite.dart';
 
 // File App

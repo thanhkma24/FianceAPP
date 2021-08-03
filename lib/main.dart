@@ -3,6 +3,7 @@ import 'package:common/core/wrapper_application.dart';
 import 'package:common/utils/color.dart';
 import 'package:example/App.dart';
 import 'package:example/auth/AuthServiceImpl.dart';
+import 'package:example/data/services/database_handler.dart';
 import 'package:example/ui/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,8 @@ void main() async {
   configure();
   shared = await SharedPreferences.getInstance();
   Translate.delegate.setShared(shared);
+  await DatabaseHandler.instance.database
+      .then((value) => print('create success'));
   Log.init();
   runApp(
     WrapperApplication(

@@ -3,12 +3,17 @@ import 'package:example/data/helpers/category_expense_handle.dart';
 import 'package:example/data/helpers/category_income_handle.dart';
 import 'package:example/data/helpers/transaction_group.dart';
 import 'package:example/data/helpers/transaction_type_helper.dart';
+import 'package:example/data/model/transaction_group_model.dart';
 import 'package:example/ui/category_screen/expense_widget.dart';
 import 'package:example/ui/category_screen/income_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:localizations/generated/l10n.dart';
 
 class CrudCategoryTrans extends StatefulWidget {
+  List<TransactionGroupModel>? list;
+
+  CrudCategoryTrans({this.list});
+
   @override
   _CrudCategoryTransState createState() => _CrudCategoryTransState();
 }
@@ -76,10 +81,7 @@ class _CrudCategoryTransState extends State<CrudCategoryTrans>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                ExpenseWidget(),
-                IncomeWidget()
-              ],
+              children: [ExpenseWidget(list: widget.list!), IncomeWidget()],
             ),
           ),
         ],
