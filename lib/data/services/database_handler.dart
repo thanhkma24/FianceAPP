@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:example/data/model/transaction_group_model.dart';
 import 'package:example/data/model/transaction_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -15,7 +16,7 @@ class DatabaseHandler{
 
   Database? _database;
 
-  Future<Database?> get database async{
+ Future<Database?> get database async{
     if(_database!=null) return _database;
     _database = await _initDatabase();
 
@@ -111,4 +112,5 @@ class DatabaseHandler{
     Database? db = await instance.database;
     return await db!.delete('transaction', where: 'id=?', whereArgs: [id]);
   }
+
 }

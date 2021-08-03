@@ -1,11 +1,16 @@
 import 'package:common/common.dart';
+import 'package:example/data/services/database_handler.dart';
+import 'package:example/repository/category/category_repository.dart';
 import 'package:example/ui/borrowlend/borrow_lend.dart';
+import 'package:example/ui/category_screen/bloc/category_bloc.dart';
 import 'package:example/ui/category_screen/category_transactions.dart';
 import 'package:example/ui/mobile_home.dart';
 import 'package:flutter/material.dart';
 import 'package:localizations/localizations.dart';
 import 'package:example/ui/borrowlend/borrow_lend.dart';
 import 'package:example/ui/tab1/search_transaction/search_transac_detail.dart';
+import 'package:sqflite/sqflite.dart';
+
 // File App
 // @project example
 // @author hoangminhk4b on 14-07-2021
@@ -17,6 +22,17 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  late final Database database;
+
+  @override
+  void initState() {
+    getDb();
+    super.initState();
+  }
+
+  void getDb() async {
+    database = (await DatabaseHandler.instance.database)!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +69,18 @@ class _AppState extends State<App> {
                         .push(MaterialPageRoute(builder: (_) => BorRowLend()));
                   },
                   child: Text("LoanScreen ")),
-              TextButton(
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => CategoryScreen())),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>BlocProvider<CategoryBloc>(
+                          create: (_) => CategoryBloc(
+                              CategoryRepositoryImpl(database: database)),
+                          child: CategoryScreen(),
+                        ) ),
+                  );
+                },
                 child: Text('Category Transaction Screen'),
               ),
               TextButton(onPressed: () {

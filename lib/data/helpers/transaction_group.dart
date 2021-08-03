@@ -17,6 +17,7 @@ class TransactionGroupHelper {
     if (_db == null) {
       _db = await _initDb();
     }
+
     return _db;
   }
 
